@@ -1,0 +1,119 @@
+<div class="row">
+  <div class="page-header">
+    <h1>Usuarios</h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <h2>Lista de usuarios</h2>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Nick</th>
+          <th>Contraseña</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let u of usuarioService.usuarios">
+        <tr>
+          <td>{{ u.nick }}</td>
+          <td>{{ u.contrasena }}</td>
+          <td>
+							<div class="btn-group">
+								<button class="btn btn-warning"
+										data-toggle="modal"
+										data-target="#modalEditar"
+										(click)="cargar(u)">
+									Editar
+								</button>
+								<button class="btn btn-danger"
+										(click)="eliminar(u.idUsuario)">
+									Eliminar
+								</button>
+							</div>
+						</td>
+        </tr>
+      </tbody>
+    </table>
+    <button type="button" class="btn btn-primary"
+				data-toggle="modal"
+				data-target="#modalAgregar">
+			Agregar
+		</button>
+  </div>
+</div>
+
+<!--Modal AGREGAR-->
+<div class="modal fade" id="modalAgregar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<form [formGroup]="usuarioNuevo" (ngSubmit)="agregarUsuario()">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">Agregar Usuario</h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="inputNick">Nick</label>
+						<input type="text"
+							   class="form-control"
+							   name="inputNick"
+							   id="inputNick"
+                 formControlName="nick"/>
+					</div>
+          <div class="form-group">
+						<label for="inputContrasena">Contrasena</label>
+						<input type="text"
+							   class="form-control"
+							   name="inputContrasena"
+							   id="inputContrasena"
+                 formControlName="contrasena" />
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+					<button type="submit" class="btn btn-primary">Guardar</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<!--Fin AGREGAR-->
+<div class="modal fade" id="modalEditar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<form [formGroup]="usuarioEditar" (ngSubmit)="editarUsuario()">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">Editar Usuario</h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="inputNick">Nick</label>
+            <input type="text"
+							   class="form-control"
+							   name="idUsuario"
+                 formControlName="idUsuario" hidden="true"/>
+            <input type="text"
+							   class="form-control"
+							   name="inputNick"
+							   id="inputNick"
+                 formControlName="nick"/>
+					</div>
+          <div class="form-group">
+						<label for="inputContrasena">Contrasena</label>
+						<input type="text"
+							   class="form-control"
+							   name="inputContrasena"
+							   id="inputContrasena"
+                 formControlName="contrasena" />
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+					<button type="submit" class="btn btn-primary">Guardar</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

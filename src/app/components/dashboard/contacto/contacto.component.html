@@ -1,0 +1,144 @@
+<div class="row">
+  <div class="page-header">
+    <h1>Contactos</h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <h2>Lista de contactos</h2>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Direccion</th>
+          <th>Telefono</th>
+          <th>Correo</th>
+          <th>IdCategoria</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let c of contactoService.contactos">
+        <tr>
+          <td>{{ c.nombre }}</td>
+          <td>{{ c.apellido }}</td>
+          <td>{{ c.direccion }}</td>
+          <td>{{ c.telefono }}</td>
+          <td>{{ c.correo }}</td>
+          <td>{{ c.idCategoria }}</td>
+          <td>
+							<div class="btn-group">
+								<button class="btn btn-warning"
+										data-toggle="modal"
+										data-target="#modalEditar"
+										data-bind="click: $root.cargar">
+									Editar
+								</button>
+								<button class="btn btn-danger"
+										(click)="eliminar(c.idContacto)">
+									Eliminar
+								</button>
+							</div>
+						</td>
+        </tr>
+      </tbody>
+    </table>
+    <button type="button" class="btn btn-primary"
+				data-toggle="modal"
+				data-target="#modalAgregar">
+			Agregar
+		</button>
+  </div>
+</div>
+
+<!--Modal AGREGAR-->
+<div class="modal fade" id="modalAgregar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<form [formGroup]="formularioContacto" (ngSubmit)="agregarContacto()">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">Agregar Contacto</h4>
+				</div>
+				<div class="modal-body">
+          <div class="form-group ">
+            <label for="idUsuario" >Usuario</label>
+              <input type="text" class="form-control" id="idUsuario" formControlName="idUsuario">
+          </div>
+          <div class="form-group ">
+            <label for="nombre" >Nombre</label>
+              <input type="text" class="form-control" id="nombre" formControlName="nombre">
+          </div>
+          <div class="form-group ">
+            <label for="apellido" >Apellido</label>
+              <input type="text" class="form-control" id="apellido" formControlName="apellido">
+          </div>
+          <div class="form-group ">
+            <label for="direccion" >Direccion</label>
+              <input type="text" class="form-control" id="direccion" formControlName="direccion">
+          </div>
+          <div class="form-group ">
+            <label for="telefono" >Telefono</label>
+              <input type="text" class="form-control" id="telefono" formControlName="telefono">
+          </div>
+          <div class="form-group ">
+            <label for="correo" >Correo</label>
+              <input type="text" class="form-control" id="correo" formControlName="correo">
+          </div>
+          <div class="form-group ">
+            <label for="idCategoria" >Categoria</label>
+            <select class="form-control"
+              id="idCategoria" formControlName="idCategoria">
+              <option value="0">Seleccione una categoria</option>
+              <option value="1">Amigos</option>
+              <option value="2">Colegio</option>
+              <option value="4">Trabajo</option>
+              <option value="5">Universidad</option>
+            </select>
+          </div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+					<button type="submit" class="btn btn-primary">Guardar</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<!--Fin AGREGAR-->
+<!--Modal EDITAR
+<div class="modal fade" id="modalEditar" tabindex="-1" role="dialog"
+	 aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<form data-bind="submit: editar">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">Editar Usuairo</h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="inputId">Id</label>
+						<input type="text" class="form-control" name="inputId" id="inputId"
+							   data-bind="value: contactoCargado().idContacto" disabled />
+					</div>
+					<div class="form-group">
+						<label for="inputNombre">Nick</label>
+						<input type="text" class="form-control" name="inputNombre" id="inputNombre"
+							   data-bind="value: contactoCargado().nombre" />
+					</div>
+					<div class="form-group">
+						<label for="inputApellido">Contrasena</label>
+						<input type="text" class="form-control" name="inputApellido" id="inputApellido"
+							   data-bind="value: contactoCargado().apellido" />
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary">Editar</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+Fin EDITAR-->
